@@ -149,7 +149,7 @@ export default function Contact() {
                     </h2>
 
                     <p className="text-gray-700 fs-18 fs-lg mb-4 mb-md-5">
-                      Always available for freelancing if the right project comes along,
+                    Looking for a reliable technology partner?
                       Feel free to contact me.
                     </p>
 
