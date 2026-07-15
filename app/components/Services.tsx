@@ -13,111 +13,104 @@ import ArchitectureRoundedIcon from "@mui/icons-material/ArchitectureRounded";
 import BugReportRoundedIcon from "@mui/icons-material/BugReportRounded";
 import IntegrationInstructionsRoundedIcon from "@mui/icons-material/IntegrationInstructionsRounded";
 import VerifiedUserRoundedIcon from "@mui/icons-material/VerifiedUserRounded";
-
+import AutoAwesomeRoundedIcon from "@mui/icons-material/AutoAwesomeRounded";
 
 export default function Services() {
 
 
-    const services = [
-        // CORE DEVELOPMENT
-        {
-            title: "SaaS Product Development",
-            desc: "End-to-end SaaS platforms with multi-tenant architecture, subscriptions, and scalable cloud deployment.",
-            icon: <CodeRoundedIcon />,
-            color: "primary",
-        },
-        {
-            title: "Enterprise Web Applications",
-            desc: "ERP, CRM, and business systems built with scalable and secure enterprise architecture.",
-            icon: <BuildRoundedIcon />,
-            color: "info",
-        },
-        {
-            title: "API Development & Integration",
-            desc: "Secure REST APIs, microservices, and third-party integrations for scalable systems.",
-            icon: <ApiRoundedIcon />,
-            color: "success",
-        },
-        {
-            title: "Admin Dashboards & CRM Systems",
-            desc: "Analytics dashboards, admin panels, and data-driven business management tools.",
-            icon: <DashboardRoundedIcon />,
-            color: "warning",
-        },
-        {
-            title: "Mobile App Development",
-            desc: "Cross-platform apps using React Native and Flutter with native performance.",
-            icon: <PhoneAndroidRoundedIcon />,
-            color: "primary",
-        },
-
-        // CLOUD & DEVOPS
-        {
-            title: "Cloud Architecture & Migration",
-            desc: "AWS and Azure cloud solutions with scalable infrastructure and deployment automation.",
-            icon: <CloudQueueRoundedIcon />,
-            color: "info",
-        },
-        {
-            title: "CI/CD & DevOps Engineering",
-            desc: "Automated pipelines, Docker, Kubernetes, and continuous deployment systems.",
-            icon: <AutorenewRoundedIcon />,
-            color: "success",
-        },
-
-        // DESIGN & UX
-        {
-            title: "UI/UX Design Systems",
-            desc: "Modern SaaS UI/UX design, Figma prototypes, and scalable design systems.",
-            icon: <DesignServicesRoundedIcon />,
-            color: "primary",
-        },
-
-        // CONSULTING
-        {
-            title: "Software Architecture Consulting",
-            desc: "System design, database architecture, scalability planning, and technical consulting.",
-            icon: <ArchitectureRoundedIcon />,
-            color: "info",
-        },
-        {
-            title: "MVP Development for Startups",
-            desc: "Fast MVP delivery with scalable architecture and production-ready codebase.",
-            icon: <RocketLaunchRoundedIcon />,
-            color: "warning",
-        },
-
-        // SUPPORT & MAINTENANCE
-        {
-            title: "Application Maintenance & Support",
-            desc: "Ongoing updates, bug fixing, performance optimization, and system improvements.",
-            icon: <BuildRoundedIcon />,
-            color: "success",
-        },
-
-        // QA & SECURITY
-        {
-            title: "Quality Assurance & Testing",
-            desc: "Manual and automated testing, API testing, and performance validation.",
-            icon: <BugReportRoundedIcon />,
-            color: "warning",
-        },
-        {
-            title: "Security & Authentication Systems",
-            desc: "Secure login systems, JWT, OAuth, encryption, and application security audits.",
-            icon: <VerifiedUserRoundedIcon />,
-            color: "success",
-        },
-
-        // INTEGRATIONS
-        {
-            title: "Third-Party Integrations",
-            desc: "Payment gateways, CRMs, ERPs, email/SMS systems, and AI API integrations.",
-            icon: <IntegrationInstructionsRoundedIcon />,
-            color: "primary",
-        },
-    ];
-
+  const services = [
+    {
+      title: "SaaS Product Development",
+      desc: "Scalable SaaS platforms with secure architecture, subscriptions, integrations, and cloud-ready infrastructure.",
+      icon: <CodeRoundedIcon />,
+      color: "primary",
+    },
+    {
+      title: "Enterprise Software Solutions",
+      desc: "Custom business applications, ERP, CRM, and internal systems built for performance and growth.",
+      icon: <BuildRoundedIcon />,
+      color: "info",
+    },
+    // AI DEVELOPMENT
+{
+  title: "AI Solutions & Automation",
+  desc: "AI-powered applications, intelligent automation, chatbots, and custom AI integrations to improve business efficiency.",
+  icon: <AutoAwesomeRoundedIcon />,
+  color: "primary",
+},
+    {
+      title: "API Development & Integrations",
+      desc: "Secure APIs, backend services, and seamless integrations that connect your digital ecosystem.",
+      icon: <ApiRoundedIcon />,
+      color: "success",
+    },
+    {
+      title: "Business Dashboards & Portals",
+      desc: "Powerful dashboards, analytics platforms, and management systems that simplify operations.",
+      icon: <DashboardRoundedIcon />,
+      color: "warning",
+    },
+    {
+      title: "Mobile Application Development",
+      desc: "Modern iOS and Android applications delivering smooth experiences across all devices.",
+      icon: <PhoneAndroidRoundedIcon />,
+      color: "primary",
+    },
+    {
+      title: "Cloud Solutions & Migration",
+      desc: "Cloud architecture, deployment, and migration solutions built on AWS and Azure platforms.",
+      icon: <CloudQueueRoundedIcon />,
+      color: "info",
+    },
+    {
+      title: "DevOps & Deployment Automation",
+      desc: "Reliable CI/CD pipelines, containerization, and automated deployments for faster releases.",
+      icon: <AutorenewRoundedIcon />,
+      color: "success",
+    },
+    {
+      title: "UI/UX Design & Prototyping",
+      desc: "User-focused interfaces, design systems, and prototypes that create exceptional experiences.",
+      icon: <DesignServicesRoundedIcon />,
+      color: "primary",
+    },
+    {
+      title: "Software Architecture Consulting",
+      desc: "Technical strategy, system design, and scalable architecture planning for complex products.",
+      icon: <ArchitectureRoundedIcon />,
+      color: "info",
+    },
+    {
+      title: "MVP Development",
+      desc: "Rapid MVP development helping startups validate ideas and launch production-ready products.",
+      icon: <RocketLaunchRoundedIcon />,
+      color: "warning",
+    },
+    {
+      title: "Application Support & Maintenance",
+      desc: "Continuous improvements, monitoring, updates, and technical support for existing applications.",
+      icon: <BuildRoundedIcon />,
+      color: "success",
+    },
+    {
+      title: "Quality Assurance & Testing",
+      desc: "Comprehensive testing strategies ensuring reliable, secure, and high-quality software.",
+      icon: <BugReportRoundedIcon />,
+      color: "warning",
+    },
+    {
+      title: "Security & Authentication",
+      desc: "Secure authentication, authorization, data protection, and application security solutions.",
+      icon: <VerifiedUserRoundedIcon />,
+      color: "success",
+    },
+    {
+      title: "Third-Party Integrations",
+      desc: "Connect payments, CRMs, ERPs, AI services, and external platforms with your applications.",
+      icon: <IntegrationInstructionsRoundedIcon />,
+      color: "primary",
+    },
+  ];
     return (
         <section className="section bg-gradient-light-white" id="services">
         <div className="container">

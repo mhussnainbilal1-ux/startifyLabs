@@ -13,7 +13,7 @@ export default function Hero() {
 
       if (typedRef.current) {
         new Typed(typedRef.current, {
-          strings: ["React", "Flutter", "Python"],
+          strings: [ "the UK.", "Europe." ,"Middle East."],
           typeSpeed: 80,
           backSpeed: 50,
           loop: true,
@@ -31,7 +31,7 @@ export default function Hero() {
       className="hero-one position-relative main-bg"
       style={{
         backgroundImage: "url(/images/personal/main-bg.png)",
-      // backgroundColor:"whitesmoke",
+        backgroundColor:"white",
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
@@ -40,33 +40,35 @@ export default function Hero() {
         <div className="row align-items-center justify-content-center">
           
           {/* Image */}
-          <div className="col-lg-5 mx-auto mt-5">
+          <div className="col-lg-5 mx-auto mt-4">
+            <div style={{ marginTop:"60px", }}>
             <Image
-              src="/images/personal/2.png"
+              src="/images/personal/hero_img.png"
               alt="hero"
-              width={500}
-              height={500}
+              width={350}
+              height={350}
               className="img-fluid"
             />
+            </div>
           </div>
 
           {/* Text */}
           <div className="col-lg-7 text-center px-0 px-xl-4 mt-5 mt-lg-0 pt-5 pt-lg-0">
-            <h5 className="d-inline-block py-1 px-3 rounded text-muted font-secondary">
+            {/* <h5 className="d-inline-block py-1 px-3 rounded text-muted font-secondary">
               Hi, I'm David Williamson
-            </h5>
+            </h5> */}
 
-            <h1 className="hero-title mb-4 font-secondary">
-              I'm a freelance{" "}
+            <h2 className="hero-title mb-4 font-secondary" style={{marginTop:"100px"}}>
+            Your Trusted White-Label Software Development Partner Across {"     "}
               <mark>
                 <span ref={typedRef} className="fw-medium"></span>
               </mark>{" "}
-              Developer
-            </h1>
+             
+            </h2>
 
             <div className="mb-5 mb-lg-0">
               <a href="/cv.pdf" className="btn btn-primary">
-                Download CV
+                Download Profile
               </a>
             </div>
           </div>

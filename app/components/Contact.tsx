@@ -12,23 +12,116 @@ export default function Contact() {
     message: "",
   });
 
+  const [errorField, setErrorField]= useState(
+    {
+      nameError: "",
+      emailError: "",
+      subjectError: "",
+      numberError: "",
+      messageError: "",
+    }
+  );
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
+    setErrorField( {
+      nameError: "",
+      emailError: "",
+      subjectError: "",
+      numberError: "",
+      messageError: "",
+    })
+
     setForm({ ...form, [e.target.id]: e.target.value });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const numberRegex = /^\+?\d+$/;
+    const MAX_MESSAGE_LENGTH = 1000;
+
     e.preventDefault();
 
-    // Simple validation (replace with backend/API later)
-    if (!form.name || !form.email) {
-      alert("Please fill required fields");
+    if (!form.name) {
+      setErrorField({
+        nameError: "Name is Required",
+        emailError: "",
+        subjectError: "",
+        numberError: "",
+        messageError: "",
+      });
       return;
     }
-
-    console.log("Form Data:", form);
-    alert("Message sent successfully!");
+    else if (!form.email) {
+      setErrorField({
+        nameError: "",
+        emailError: "Email is Required",
+        subjectError: "",
+        numberError: "",
+        messageError: "",
+      });
+      return;
+    }
+    else if (!emailRegex.test(form.email.trim())) {
+      setErrorField({
+        nameError: "",
+        emailError: "Please enter a valid email address",
+        subjectError: "",
+        numberError: "",
+        messageError: "",
+      })
+      return;
+    }
+    else if (!form.number) {
+      setErrorField({
+        nameError: "",
+        emailError: "",
+        subjectError: "",
+        numberError: "Contact Number is Required",
+        messageError: "",
+      });
+      return;
+    }
+    else if (!numberRegex.test(form.number.trim())) {
+      setErrorField({
+        nameError: "",
+        emailError: "",
+        subjectError: "",
+        numberError: "Contact Number must contain only numbers",
+        messageError: "",
+      });
+      return;
+    }
+   else if (!form.message) {
+      setErrorField({
+        nameError: "",
+        emailError: "",
+        subjectError: "",
+        numberError: "",
+        messageError: "Message is Required",
+      });
+      return;
+    }
+    else if (form.message.trim().length > MAX_MESSAGE_LENGTH) {
+      setErrorField({
+        nameError: "",
+        emailError: "",
+        subjectError: "",
+        numberError: "",
+        messageError: `Message cannot exceed ${MAX_MESSAGE_LENGTH} characters`,
+      });
+      return;
+    }
+    else{
+      setErrorField({
+        nameError: "",
+        emailError: "",
+        subjectError: "",
+        numberError: "",
+        messageError: "",
+      });
+    }
   };
 
   return (
@@ -65,7 +158,7 @@ export default function Contact() {
 
                         <div className="col-md-6 mb-3">
                           <label className="fw-medium form-label fs-16">
-                            Name
+                            Name *
                           </label>
                           <input
                             type="text"
@@ -75,11 +168,25 @@ export default function Contact() {
                             value={form.name}
                             onChange={handleChange}
                           />
+                          {
+                            errorField.nameError!=""&& 
+                              <span
+                                style={{
+                                  color: "#dc2626",
+                                  fontSize: "10px",
+                                  marginTop: "4px",
+                                  display: "block",
+                                  fontWeight: 500,
+                                }}
+                              >
+                                {errorField.nameError}
+                              </span>
+                          }
                         </div>
 
                         <div className="col-md-6 mb-3">
                           <label className="fw-medium form-label fs-16">
-                            Email
+                            Email *
                           </label>
                           <input
                             type="email"
@@ -89,6 +196,20 @@ export default function Contact() {
                             value={form.email}
                             onChange={handleChange}
                           />
+                          {
+                            errorField.emailError!=""&& 
+                              <span
+                                style={{
+                                  color: "#dc2626",
+                                  fontSize: "10px",
+                                  marginTop: "4px",
+                                  display: "block",
+                                  fontWeight: 500,
+                                }}
+                              >
+                                {errorField.emailError}
+                              </span>
+                          }
                         </div>
 
                         <div className="col-md-6 mb-3">
@@ -107,7 +228,7 @@ export default function Contact() {
 
                         <div className="col-md-6 mb-3">
                           <label className="fw-medium form-label fs-16">
-                            Contact
+                            Contact *
                           </label>
                           <input
                             type="text"
@@ -117,11 +238,25 @@ export default function Contact() {
                             value={form.number}
                             onChange={handleChange}
                           />
+                          {
+                            errorField.numberError!=""&& 
+                              <span
+                                style={{
+                                  color: "#dc2626",
+                                  fontSize: "10px",
+                                  marginTop: "4px",
+                                  display: "block",
+                                  fontWeight: 500,
+                                }}
+                              >
+                                {errorField.numberError}
+                              </span>
+                          }
                         </div>
 
                         <div className="col-12 mb-3">
                           <label className="fw-medium form-label fs-16">
-                            Message
+                            Message *
                           </label>
                           <textarea
                             id="message"
@@ -131,6 +266,20 @@ export default function Contact() {
                             value={form.message}
                             onChange={handleChange}
                           />
+                           {
+                            errorField.messageError!=""&& 
+                              <span
+                                style={{
+                                  color: "#dc2626",
+                                  fontSize: "10px",
+                                  marginTop: "4px",
+                                  display: "block",
+                                  fontWeight: 500,
+                                }}
+                              >
+                                {errorField.messageError}
+                              </span>
+                          }
                         </div>
 
                         <div className="col-12">
