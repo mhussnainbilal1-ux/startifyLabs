@@ -6,7 +6,7 @@ import Services from "./components/Services";
 import Portfolio from "./components/Portfolio";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
-
+import { Toaster } from "react-hot-toast";
 export default function Home() {
   return (
    <>
@@ -19,6 +19,7 @@ export default function Home() {
    <section id="portfolio"><Portfolio/></section>
    <section id="contact"><Contact/></section>
    <Footer/>
+   <Toaster position="bottom-right" />
    </>
   );
 }

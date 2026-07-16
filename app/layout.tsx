@@ -1,7 +1,6 @@
 
 import Script from "next/script";
 import Header from "./components/Header";
-
 export const metadata = {
   title: "Selfown - Responsive Personal page",
   description: "Premium Bootstrap 5 Template",
@@ -21,22 +20,10 @@ export default function RootLayout({ children }:any) {
         <link rel="stylesheet" href="/css/style.min.css" />
         <link rel="stylesheet" href="/css/colors/default.css" id="color-opt" />
       </head>
-
       <body>
         <Header/>
         {children}
-
-        {/* Scripts (recommended way in Next.js) */}
-
-        {/* <Script src="/js/bootstrap.bundle.min.js" strategy="beforeInteractive" /> */}
-
-        {/* feather icon */}
-        {/* <Script src="/js/feather.js" strategy="afterInteractive" />
-        <Script src="/js/shuffle.min.js" strategy="afterInteractive" />
-        <Script src="/js/projects.init.js" strategy="afterInteractive" />
-        <Script src="/js/typed.js" strategy="afterInteractive" />
-        <Script src="/js/app.js" strategy="afterInteractive" /> */}
-      </body>
+       </body>
     </html>
   );
 }

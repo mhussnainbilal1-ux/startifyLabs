@@ -2,8 +2,11 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import emailjs from "@emailjs/browser";
+import toast from "react-hot-toast";
 
 export default function Contact() {
+  const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -12,7 +15,7 @@ export default function Contact() {
     message: "",
   });
 
-  const [errorField, setErrorField]= useState(
+  const [errorField, setErrorField] = useState(
     {
       nameError: "",
       emailError: "",
@@ -25,7 +28,7 @@ export default function Contact() {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setErrorField( {
+    setErrorField({
       nameError: "",
       emailError: "",
       subjectError: "",
@@ -93,7 +96,7 @@ export default function Contact() {
       });
       return;
     }
-   else if (!form.message) {
+    else if (!form.message) {
       setErrorField({
         nameError: "",
         emailError: "",
@@ -113,14 +116,45 @@ export default function Contact() {
       });
       return;
     }
-    else{
-      setErrorField({
-        nameError: "",
-        emailError: "",
-        subjectError: "",
-        numberError: "",
-        messageError: "",
+    else {
+      sendEmail();
+    }
+  };
+
+
+  const sendEmail = async () => {
+    const templateParams = {
+      name: form.name,
+      email: form.email,
+      subject: form.subject,
+      number: form.number,
+      message: form.message,
+    };
+
+    try {
+      setLoading(true);
+      const response = await emailjs.send(
+        "service_eksnaep",//"YOUR_SERVICE_ID",
+        "template_xcrq5ao",//"YOUR_TEMPLATE_ID",
+        templateParams,
+        "noA_5j5NgHMHegU-0",//"YOUR_PUBLIC_KEY"
+      );
+
+      console.log("SUCCESS!", response);
+
+      toast.success("Your message has been sent successfully.");
+
+      setForm({
+        name: "",
+        email: "",
+        subject: "",
+        number: "",
+        message: "",
       });
+      setLoading(false);
+    } catch (error) {
+      console.error("FAILED...", error);
+      toast.error("Failed to send message. Please try again.");
     }
   };
 
@@ -133,7 +167,7 @@ export default function Contact() {
             <div
               className="card bg-white"
               style={{
-               // backgroundImage: "url(/images/personal/contact_us.png)",
+                // backgroundImage: "url(/images/personal/contact_us.png)",
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "15%",
                 backgroundPosition: "right bottom",
@@ -149,7 +183,7 @@ export default function Contact() {
                     </h2>
 
                     <p className="text-gray-700 fs-18 fs-lg mb-4 mb-md-5">
-                    Looking for a reliable technology partner?
+                      Looking for a reliable technology partner?
                       Feel free to contact us.
                     </p>
 
@@ -169,18 +203,18 @@ export default function Contact() {
                             onChange={handleChange}
                           />
                           {
-                            errorField.nameError!=""&& 
-                              <span
-                                style={{
-                                  color: "#dc2626",
-                                  fontSize: "10px",
-                                  marginTop: "4px",
-                                  display: "block",
-                                  fontWeight: 500,
-                                }}
-                              >
-                                {errorField.nameError}
-                              </span>
+                            errorField.nameError != "" &&
+                            <span
+                              style={{
+                                color: "#dc2626",
+                                fontSize: "10px",
+                                marginTop: "4px",
+                                display: "block",
+                                fontWeight: 500,
+                              }}
+                            >
+                              {errorField.nameError}
+                            </span>
                           }
                         </div>
 
@@ -197,18 +231,18 @@ export default function Contact() {
                             onChange={handleChange}
                           />
                           {
-                            errorField.emailError!=""&& 
-                              <span
-                                style={{
-                                  color: "#dc2626",
-                                  fontSize: "10px",
-                                  marginTop: "4px",
-                                  display: "block",
-                                  fontWeight: 500,
-                                }}
-                              >
-                                {errorField.emailError}
-                              </span>
+                            errorField.emailError != "" &&
+                            <span
+                              style={{
+                                color: "#dc2626",
+                                fontSize: "10px",
+                                marginTop: "4px",
+                                display: "block",
+                                fontWeight: 500,
+                              }}
+                            >
+                              {errorField.emailError}
+                            </span>
                           }
                         </div>
 
@@ -239,18 +273,18 @@ export default function Contact() {
                             onChange={handleChange}
                           />
                           {
-                            errorField.numberError!=""&& 
-                              <span
-                                style={{
-                                  color: "#dc2626",
-                                  fontSize: "10px",
-                                  marginTop: "4px",
-                                  display: "block",
-                                  fontWeight: 500,
-                                }}
-                              >
-                                {errorField.numberError}
-                              </span>
+                            errorField.numberError != "" &&
+                            <span
+                              style={{
+                                color: "#dc2626",
+                                fontSize: "10px",
+                                marginTop: "4px",
+                                display: "block",
+                                fontWeight: 500,
+                              }}
+                            >
+                              {errorField.numberError}
+                            </span>
                           }
                         </div>
 
@@ -266,28 +300,69 @@ export default function Contact() {
                             value={form.message}
                             onChange={handleChange}
                           />
-                           {
-                            errorField.messageError!=""&& 
-                              <span
-                                style={{
-                                  color: "#dc2626",
-                                  fontSize: "10px",
-                                  marginTop: "4px",
-                                  display: "block",
-                                  fontWeight: 500,
-                                }}
-                              >
-                                {errorField.messageError}
-                              </span>
+                          {
+                            errorField.messageError != "" &&
+                            <span
+                              style={{
+                                color: "#dc2626",
+                                fontSize: "10px",
+                                marginTop: "4px",
+                                display: "block",
+                                fontWeight: 500,
+                              }}
+                            >
+                              {errorField.messageError}
+                            </span>
                           }
                         </div>
 
-                        <div className="col-12">
+                        {/* <div className="col-12">
                           <button type="submit" className="btn btn-primary mt-2">
                             Send message
                           </button>
-                        </div>
+                        </div> */}
 
+                        <div className="col-12">
+                          <button
+                            type="submit"
+                            className="btn btn-primary mt-2"
+                            disabled={loading}
+                            style={{
+                              minWidth: "170px",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              gap: "10px",
+                            }}
+                          >
+                            {loading && (
+                              <span
+                                style={{
+                                  width: "18px",
+                                  height: "18px",
+                                  border: "2px solid rgba(255,255,255,0.4)",
+                                  borderTop: "2px solid #fff",
+                                  borderRadius: "50%",
+                                  display: "inline-block",
+                                  animation: "spin 0.8s linear infinite",
+                                }}
+                              />
+                            )}
+
+                            {loading ? "Sending..." : "Send Message"}
+                          </button>
+
+                          <style jsx>{`
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  `}</style>
+                        </div>
                       </div>
                     </form>
                   </div>
