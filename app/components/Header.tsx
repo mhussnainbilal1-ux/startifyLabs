@@ -74,16 +74,16 @@ export default function Header() {
                 <div className={`collapse navbar-collapse ${isOpen ? "show" : ""}`}>
 
                     <style jsx global>{`
-  .nav-link::before {
-    content: none !important;
-  }
+                    .nav-link::before {
+                    content: none !important;
+                    }
 
-  .nav-link {
-    position: relative;
-  }
+                    .nav-link {
+                    position: relative;
+                    }
 
-  
-`}</style>
+
+                    `}</style>
 
                     <ul className="navbar-nav mx-auto navbar-center mt-lg-0 mt-2">
 
@@ -95,8 +95,8 @@ export default function Header() {
                         </li>
                         <li className="nav-item">
                             <Link className={activeMenu === "about" ? " nav-link active" : "nav-link"} href="#about" onClick={() => { setActiveMenu("about"); setIsOpen(false) }}>
-                            <strong>
-                                About
+                                <strong>
+                                    About
                                 </strong>
                             </Link>
                         </li>

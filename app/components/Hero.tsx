@@ -59,7 +59,14 @@ export default function Hero() {
             </h2>
 
             <div className="mb-5 mb-lg-0">
-              <a href="#" className="btn btn-primary">
+              <a className="btn btn-primary"
+              onClick={() => {
+                const link = document.createElement("a");
+                link.href = "/company-profile/Startify-Labs-Company-Profile.pdf";
+                link.download = "Startify-Labs-Company-Profile.pdf";
+                link.click();
+              }}
+              >
                 Download Profile
               </a>
             </div>
