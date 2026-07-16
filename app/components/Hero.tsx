@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef } from "react";
+import HeroCarosal from "./HeroCarosal";
 
 export default function Hero() {
   const typedRef = useRef<HTMLSpanElement>(null);
@@ -31,34 +32,25 @@ export default function Hero() {
       className="hero-one position-relative main-bg"
       style={{
         backgroundImage: "url(/images/personal/main-bg.png)",
-        backgroundColor:"white",
+        backgroundColor:"#f5f6f8",
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
     >
+       <HeroCarosal/>
       <div className="container">
         <div className="row align-items-center justify-content-center">
           
-          {/* Image */}
-          <div className="col-lg-5 mx-auto mt-4">
-            <div style={{ marginTop:"60px", }}>
-            <Image
-              src="/images/personal/hero_img.png"
-              alt="hero"
-              width={350}
-              height={350}
-              className="img-fluid"
-            />
-            </div>
-          </div>
+          <div className="col-lg-12 text-center px-0 px-xl-4 mt-5 mt-lg-0 pt-5 pt-lg-0 mb-5">
+           
 
-          {/* Text */}
-          <div className="col-lg-7 text-center px-0 px-xl-4 mt-5 mt-lg-0 pt-5 pt-lg-0">
-            {/* <h5 className="d-inline-block py-1 px-3 rounded text-muted font-secondary">
-              Hi, I'm David Williamson
-            </h5> */}
-
-            <h2 className="hero-title mb-4 font-secondary" style={{marginTop:"100px"}}>
+            <h2 className="hero-title mb-4 font-secondary" style={{
+              fontFamily: "'Space Grotesk', sans-serif !important",
+              fontSize: "clamp(32px, 5vw, 54px)",
+              lineHeight: "1.3",
+              fontWeight: 400,
+              color: "#172d51",
+            }} >
             Your Trusted White-Label Software Development Partner Across {"     "}
               <mark>
                 <span ref={typedRef} className="fw-medium"></span>
@@ -67,7 +59,7 @@ export default function Hero() {
             </h2>
 
             <div className="mb-5 mb-lg-0">
-              <a href="/cv.pdf" className="btn btn-primary">
+              <a href="#" className="btn btn-primary">
                 Download Profile
               </a>
             </div>

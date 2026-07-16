@@ -25,6 +25,7 @@ export default function Header() {
     return (
         <nav
             id="navbar"
+            
             className="navbar navbar-expand-lg fixed-top"
             style={{
                 transition: "all 0.3s ease",
@@ -88,26 +89,27 @@ export default function Header() {
 
                         <li className="nav-item">
                             <Link className={activeMenu === "home" ? " nav-link active" : "nav-link"} href="#home" onClick={() => { setActiveMenu("home"); setIsOpen(false) }}>
-                                Home
+                                <strong>Home</strong>
 
                             </Link>
                         </li>
                         <li className="nav-item">
                             <Link className={activeMenu === "about" ? " nav-link active" : "nav-link"} href="#about" onClick={() => { setActiveMenu("about"); setIsOpen(false) }}>
-
+                            <strong>
                                 About
+                                </strong>
                             </Link>
                         </li>
 
                         <li className="nav-item">
                             <Link className={activeMenu === "services" ? " nav-link active" : "nav-link"} href="#services" onClick={() => { setActiveMenu("services"); setIsOpen(false) }}>
-                                Services
+                            <strong>Services </strong> 
                             </Link>
                         </li>
 
                         <li className="nav-item">
                             <Link href="#portfolio" className={activeMenu === "portfolio" ? " nav-link active" : "nav-link"} onClick={() => { setActiveMenu("portfolio"); setIsOpen(false) }}>
-                                Portfolio
+                            <strong>Portfolio</strong> 
                             </Link>
                         </li>
 

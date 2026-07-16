@@ -133,7 +133,7 @@ export default function Contact() {
             <div
               className="card bg-white"
               style={{
-                backgroundImage: "url(/images/personal/testi-pet.png)",
+               // backgroundImage: "url(/images/personal/contact_us.png)",
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "15%",
                 backgroundPosition: "right bottom",
@@ -150,7 +150,7 @@ export default function Contact() {
 
                     <p className="text-gray-700 fs-18 fs-lg mb-4 mb-md-5">
                     Looking for a reliable technology partner?
-                      Feel free to contact me.
+                      Feel free to contact us.
                     </p>
 
                     <form onSubmit={handleSubmit}>
@@ -296,7 +296,7 @@ export default function Contact() {
                   <div className="col-md-4 text-center">
 
                     <Image
-                      src="/images/personal/contact.svg"
+                      src="/images/personal/contact.png"
                       alt="contact"
                       width={200}
                       height={200}

@@ -73,7 +73,7 @@ export default function About() {
          {/* Left Content */}
 <div className="col-lg-6 align-self-center">
   <h5 className="fs-24 text-dark fw-medium">
-    <mark>About Startify Labs</mark>
+    About Startify Labs
   </h5>
 
   <h4 className="fw-normal lh-base text-gray-700 mb-4 fs-20">
