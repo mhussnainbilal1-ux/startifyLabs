@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="row">
           {/* Left */}
           <div className="col-lg-5 border-e-dashed">
-            <Link href="/">
+            {/* <Link href="/">
               <Image
                 src="/images/logo-sm.png"
                 alt="Logo"
@@ -22,7 +22,7 @@ export default function Footer() {
                 height={16}
                 className="ms-2"
               />
-            </Link>
+            </Link> */}
 
             <p className="my-4">
               In an ideal world this text wouldn&apos;t exist, a client would
