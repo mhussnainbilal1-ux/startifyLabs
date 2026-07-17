@@ -14,7 +14,7 @@ export default function Hero() {
 
       if (typedRef.current) {
         new Typed(typedRef.current, {
-          strings: [ "the UK.", "Europe." ," the Middle East."],
+          strings: [ "the UK", "Europe" ," the Middle East"],
           typeSpeed: 80,
           backSpeed: 50,
           loop: true,
