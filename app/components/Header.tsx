@@ -41,7 +41,7 @@ export default function Header() {
             <div className="container">
                 {/* Brand */}
                 <Link href="#home" className="navbar-brand">
-                    <Logo />
+                    <Logo/>
                 </Link>
 
                 {/* Mobile Toggle */}

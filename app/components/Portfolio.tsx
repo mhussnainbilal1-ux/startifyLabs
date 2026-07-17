@@ -15,78 +15,7 @@ type Project = {
 
 const projects: Project[] = [
   
-  {
-    title: "Healthcare Analytics Platform",
-    company: "CureMD - ICE Platform",
-    image: "/images/logos/NETCore.png",
-    tags: [".NET Core", "Multi-Tenant", "Healthcare", "Analytics"],
-    category: ["dotnet", "database"],
-    bg: "info",
-  },
-  {
-    title: "Insurance Claims Management System",
-    company: "Enterprise Insurance Solution",
-    image: "/images/logos/react.svg",
-    tags: ["React", "GraphQL", "Microservices", "SignalR"],
-    category: ["react", "dotnet"],
-    bg: "success",
-  },
-  {
-    title: "Banking CRM & Loan Management System",
-    company: "Saudi Investment Bank",
-    image: "/images/logos/NETCore.png",
-    tags: [".NET MVC", "CRM", "Banking", "Enterprise"],
-    category: ["dotnet", "backend"],
-    bg: "warning",
-  },
-  {
-    title: "Enterprise CMS Platform",
-    company: "PepsiCo Digital Platform",
-    image: "/images/logos/react.svg",
-    tags: ["React", ".NET Core", "CMS", "Azure"],
-    category: ["react", "azure"],
-    bg: "primary",
-  },
-  {
-    title: "Mobile Application Ecosystem",
-    company: "Consumer Mobile Solutions",
-    image: "/images/logos/reactnative.png",
-    tags: ["React Native", "Firebase", "APIs", "Mobile"],
-    category: ["mobile", "reactnative"],
-    bg: "info",
-  },
-  {
-    title: "AI Powered Business Solutions",
-    company: "Enterprise AI Integration",
-    image: "/images/logos/python.jpeg",
-    tags: ["Python", "LLMs", "RAG", "Automation"],
-    category: ["ai", "python"],
-    bg: "success",
-  },
-  {
-    title: "Cloud Native Enterprise Systems",
-    company: "AWS & Azure Solutions",
-    image: "/images/logos/aws.png",
-    tags: ["AWS", "Azure", "Docker", "CI/CD"],
-    category: ["aws", "azure"],
-    bg: "warning",
-  },
-  {
-    title: "Microservices Architecture",
-    company: "Enterprise Backend Systems",
-    image: "/images/logos/NETCore.png",
-    tags: [".NET Core", "APIs", "Microservices", "Cloud"],
-    category: ["dotnet", "backend"],
-    bg: "primary",
-  },
-  {
-    title: "3D Printing Marketplace Platform",
-    company: "WIPPIT",
-    image: "/images/logos/react.svg",
-    tags: ["React", ".NET Core", "Python", "Azure", "Marketplace"],
-    category: ["react", "dotnet", "azure"],
-    bg: "primary",
-  },
+  
   {
     title: "Vehicle Leasing Platform",
     company: "Vanarama (Auto Trader Group) - UK",
@@ -183,6 +112,78 @@ const projects: Project[] = [
     category: ["dotnet", "azure"],
     bg: "warning",
   },
+  {
+    title: "Healthcare Analytics Platform",
+    company: "CureMD - ICE Platform",
+    image: "/images/logos/NETCore.png",
+    tags: [".NET Core", "Multi-Tenant", "Healthcare", "Analytics"],
+    category: ["dotnet", "database"],
+    bg: "info",
+  },
+  {
+    title: "Insurance Claims Management System",
+    company: "Enterprise Insurance Solution",
+    image: "/images/logos/react.svg",
+    tags: ["React", "GraphQL", "Microservices", "SignalR"],
+    category: ["react", "dotnet"],
+    bg: "success",
+  },
+  {
+    title: "Banking CRM & Loan Management System",
+    company: "Saudi Investment Bank",
+    image: "/images/logos/NETCore.png",
+    tags: [".NET MVC", "CRM", "Banking", "Enterprise"],
+    category: ["dotnet", "backend"],
+    bg: "warning",
+  },
+  {
+    title: "Enterprise CMS Platform",
+    company: "PepsiCo Digital Platform",
+    image: "/images/logos/react.svg",
+    tags: ["React", ".NET Core", "CMS", "Azure"],
+    category: ["react", "azure"],
+    bg: "primary",
+  },
+  {
+    title: "Mobile Application Ecosystem",
+    company: "Consumer Mobile Solutions",
+    image: "/images/logos/reactnative.png",
+    tags: ["React Native", "Firebase", "APIs", "Mobile"],
+    category: ["mobile", "reactnative"],
+    bg: "info",
+  },
+  {
+    title: "AI Powered Business Solutions",
+    company: "Enterprise AI Integration",
+    image: "/images/logos/python.jpeg",
+    tags: ["Python", "LLMs", "RAG", "Automation"],
+    category: ["ai", "python"],
+    bg: "success",
+  },
+  {
+    title: "Cloud Native Enterprise Systems",
+    company: "AWS & Azure Solutions",
+    image: "/images/logos/aws.png",
+    tags: ["AWS", "Azure", "Docker", "CI/CD"],
+    category: ["aws", "azure"],
+    bg: "warning",
+  },
+  {
+    title: "Microservices Architecture",
+    company: "Enterprise Backend Systems",
+    image: "/images/logos/NETCore.png",
+    tags: [".NET Core", "APIs", "Microservices", "Cloud"],
+    category: ["dotnet", "backend"],
+    bg: "primary",
+  },
+  {
+    title: "3D Printing Marketplace Platform",
+    company: "WIPPIT",
+    image: "/images/logos/react.svg",
+    tags: ["React", ".NET Core", "Python", "Azure", "Marketplace"],
+    category: ["react", "dotnet", "azure"],
+    bg: "primary",
+  },
 ];
 
  
@@ -245,9 +246,9 @@ export default function Portfolio() {
                       </h5>
                       <p className="text-muted mb-0 fs-13">
                         {project.company}{" "}
-                        <Link href="#">
+                        {/* <Link href="#">
                           <i className="ti ti-external-link fs-18 text-primary"></i>
-                        </Link>
+                        </Link> */}
                       </p>
                     </div>
                   </div>

@@ -379,7 +379,7 @@ export default function Contact() {
                     />
 
                     {/* Phone */}
-                    <div className="d-flex align-items-center">
+                    {/* <div className="d-flex align-items-center">
                       <div className="bg-light d-flex justify-content-center align-items-center thumb-lg rounded">
                         <i className="ti ti-phone fs-22"></i>
                       </div>
@@ -390,7 +390,7 @@ export default function Contact() {
                           9:00am to 7:00pm
                         </span>
                       </div>
-                    </div>
+                    </div> */}
 
                     <hr className="hr-dashed my-3" />
 
@@ -402,7 +402,7 @@ export default function Contact() {
 
                       <div className="ms-3 text-start">
                         <span className="d-block lh-1">
-                          example@example.com
+                          info@startifylabs.co.uk
                         </span>
                         <span className="text-muted fs-14">
                           Monday to Saturday
