@@ -1,6 +1,7 @@
 "use client";
 import RefreshRoundedIcon from "@mui/icons-material/RefreshRounded";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
+import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import {
   ChangeEvent,
   CSSProperties,
@@ -74,6 +75,7 @@ export default function LeadsTable() {
   const [saving, setSaving] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   const [successMessage, setSuccessMessage] = useState<string>("");
+  const [deletingId, setDeletingId] = useState<string | null>(null);
 
   const [search, setSearch] = useState<string>("");
   const [statusFilter, setStatusFilter] = useState<string>("");
@@ -225,6 +227,49 @@ export default function LeadsTable() {
     setSearch("");
     setStatusFilter("");
     setServiceFilter("");
+  };
+
+  const deleteLead = async (lead: Lead): Promise<void> => {
+    const confirmed = window.confirm(
+      `Are you sure you want to delete "${lead.company}"?`
+    );
+  
+    if (!confirmed) return;
+  
+    setDeletingId(lead._id);
+    setError("");
+    setSuccessMessage("");
+  
+    try {
+      const response = await fetch(`/api/leads/${lead._id}`, {
+        method: "DELETE",
+      });
+  
+      const data = (await response.json()) as LeadsApiResponse;
+  
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || "Unable to delete lead.");
+      }
+  
+      setLeads((previousLeads) =>
+        previousLeads.filter(
+          (currentLead) => currentLead._id !== lead._id
+        )
+      );
+  
+      if (editingId === lead._id) {
+        setEditingId(null);
+        setEditForm(emptyLead);
+      }
+  
+      setSuccessMessage("Lead deleted successfully.");
+    } catch (error) {
+      setError(
+        error instanceof Error ? error.message : "Unable to delete lead."
+      );
+    } finally {
+      setDeletingId(null);
+    }
   };
 
   return (
@@ -686,24 +731,63 @@ export default function LeadsTable() {
                           </button>
                         </div>
                       ) : (
-                          <button
-                            type="button"
-                            onClick={() => startEditing(lead)}
-                            title="Edit Lead"
+                        <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          gap: "8px",
+                        }}
+                      >
+                        <button
+                          type="button"
+                          onClick={() => startEditing(lead)}
+                          title="Edit Lead"
+                          disabled={deletingId === lead._id}
+                          style={{
+                            ...actionButtonStyle,
+                            backgroundColor: "#172d51",
+                            color: "#ffffff",
+                            width: "40px",
+                            height: "40px",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            padding: 0,
+                            opacity: deletingId === lead._id ? 0.6 : 1,
+                          }}
+                        >
+                          <EditRoundedIcon style={{ fontSize: "20px" }} />
+                        </button>
+                      
+                        <button
+                          type="button"
+                          onClick={() => deleteLead(lead)}
+                          title="Delete Lead"
+                          disabled={deletingId === lead._id}
+                          style={{
+                            ...actionButtonStyle,
+                            backgroundColor: "#d92d20",
+                            color: "#ffffff",
+                            width: "40px",
+                            height: "40px",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            padding: 0,
+                            opacity: deletingId === lead._id ? 0.6 : 1,
+                            cursor:
+                              deletingId === lead._id ? "not-allowed" : "pointer",
+                          }}
+                        >
+                          <DeleteRoundedIcon
                             style={{
-                              ...actionButtonStyle,
-                              backgroundColor: "#172d51",
-                              color: "#ffffff",
-                              width: "40px",
-                              height: "40px",
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                              padding: 0,
+                              fontSize: "20px",
+                              opacity: deletingId === lead._id ? 0.5 : 1,
                             }}
-                          >
-                            <EditRoundedIcon style={{ fontSize: "20px" }} />
-                          </button>
+                          />
+                        </button>
+                      </div>
                       )}
                     </td>
                   </tr>

@@ -156,3 +156,72 @@ export async function PATCH(
     );
   }
 }
+
+export async function DELETE(
+  request: NextRequest,
+  context: RouteContext
+) {
+  try {
+    const session = await getSession();
+
+    if (!session) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Unauthorized.",
+        },
+        {
+          status: 401,
+        }
+      );
+    }
+
+    const { id } = await context.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Invalid lead ID.",
+        },
+        {
+          status: 400,
+        }
+      );
+    }
+
+    await connectToDatabase();
+
+    const deletedLead = await Lead.findByIdAndDelete(id).lean();
+
+    if (!deletedLead) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Lead not found.",
+        },
+        {
+          status: 404,
+        }
+      );
+    }
+
+    return NextResponse.json({
+      success: true,
+      message: "Lead deleted successfully.",
+      lead: deletedLead,
+    });
+  } catch (error) {
+    console.error("Delete lead error:", error);
+
+    return NextResponse.json(
+      {
+        success: false,
+        message: "Unable to delete the lead.",
+      },
+      {
+        status: 500,
+      }
+    );
+  }
+}
