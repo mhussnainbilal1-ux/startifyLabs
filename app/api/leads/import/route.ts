@@ -19,6 +19,30 @@ type SkippedRow = {
   reason: string;
 };
 
+type PreparedLead = {
+  spreadsheetRowNumber: number;
+  data: {
+    company: string;
+    contact: string;
+    email: string;
+    website: string;
+    linkedin: string;
+    country: string;
+    industry: string;
+    employees: (typeof employeeRanges)[number];
+    service: string;
+    status: (typeof leadStatuses)[number];
+    priority: (typeof leadPriorities)[number];
+    outsourceScore: number;
+    projectSize: (typeof projectSizes)[number];
+    source: string;
+    techStack: string;
+    followUp: Date | null;
+    lastContacted: Date | null;
+    notes: string;
+  };
+};
+
 const emailPattern = /^\S+@\S+\.\S+$/;
 
 const headerAliases: Record<string, string> = {
@@ -90,16 +114,32 @@ const headerAliases: Record<string, string> = {
 };
 
 function normalizeHeader(value: CellValue): string {
-    const normalized = String(value ?? "")
-      .trim()
-      .toLowerCase()
-      .replace(/[^a-z0-9]/g, "");
-  
-    return headerAliases[normalized] ?? normalized;
-  }
+  const normalized = String(value ?? "")
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, "");
+
+  return headerAliases[normalized] ?? normalized;
+}
 
 function getText(value: CellValue): string {
   return String(value ?? "").trim();
+}
+
+function normalizeDuplicateValue(value: unknown): string {
+  return String(value ?? "")
+    .trim()
+    .replace(/\s+/g, " ")
+    .toLowerCase();
+}
+
+function createDuplicateKey(
+  company: unknown,
+  country: unknown
+): string {
+  return `${normalizeDuplicateValue(
+    company
+  )}|||${normalizeDuplicateValue(country)}`;
 }
 
 function getEnumValue<T extends readonly string[]>(
@@ -117,30 +157,30 @@ function getEnumValue<T extends readonly string[]>(
 }
 
 function getOutsourceScore(value: CellValue): number {
-    const text = String(value ?? "").trim();
-  
-    if (!text) {
-      return 5;
-    }
-  
-    const matchedNumber = text.match(/\d+(\.\d+)?/);
-  
-    if (!matchedNumber) {
-      return 5;
-    }
-  
-    const score = Number(matchedNumber[0]);
-  
-    if (
-      !Number.isFinite(score) ||
-      score < 1 ||
-      score > 10
-    ) {
-      return 5;
-    }
-  
-    return Math.round(score);
+  const text = String(value ?? "").trim();
+
+  if (!text) {
+    return 5;
   }
+
+  const matchedNumber = text.match(/\d+(\.\d+)?/);
+
+  if (!matchedNumber) {
+    return 5;
+  }
+
+  const score = Number(matchedNumber[0]);
+
+  if (
+    !Number.isFinite(score) ||
+    score < 1 ||
+    score > 10
+  ) {
+    return 5;
+  }
+
+  return Math.round(score);
+}
 
 function getOptionalDate(value: CellValue): Date | null {
   const text = getText(value);
@@ -227,7 +267,7 @@ export async function POST(request: NextRequest) {
       return row[index] ?? "";
     };
 
-    const validLeads: Array<Record<string, unknown>> = [];
+    const preparedLeads: PreparedLead[] = [];
     const skippedRows: SkippedRow[] = [];
 
     dataRows.forEach((row, index) => {
@@ -237,9 +277,11 @@ export async function POST(request: NextRequest) {
         return;
       }
 
-      const company = getText(
-        getCell(row, "company")
-      );
+      const company = getText(getCell(row, "company"));
+
+      const country =
+        getText(getCell(row, "country")) ||
+        "United Kingdom";
 
       const email = getText(
         getCell(row, "email")
@@ -263,86 +305,72 @@ export async function POST(request: NextRequest) {
         return;
       }
 
-      validLeads.push({
-        company,
+      preparedLeads.push({
+        spreadsheetRowNumber,
 
-        contact: getText(
-          getCell(row, "contact")
-        ),
+        data: {
+          company,
 
-        email,
+          contact: getText(getCell(row, "contact")),
 
-        website: getText(
-          getCell(row, "website")
-        ),
+          email,
 
-        linkedin: getText(
-          getCell(row, "linkedin")
-        ),
+          website: getText(getCell(row, "website")),
 
-        country:
-          getText(getCell(row, "country")) ||
-          "United Kingdom",
+          linkedin: getText(getCell(row, "linkedin")),
 
-        industry: getText(
-          getCell(row, "industry")
-        ),
+          country,
 
-        employees: getEnumValue(
-          employeeRanges,
-          getCell(row, "employees"),
-          "11-50"
-        ),
+          industry: getText(getCell(row, "industry")),
 
-        service: getText(
-          getCell(row, "service")
-        ),
+          employees: getEnumValue(
+            employeeRanges,
+            getCell(row, "employees"),
+            "11-50"
+          ),
 
-        status: getEnumValue(
-          leadStatuses,
-          getCell(row, "status"),
-          "New"
-        ),
+          service: getText(getCell(row, "service")),
 
-        priority: getEnumValue(
-          leadPriorities,
-          getCell(row, "priority"),
-          "B"
-        ),
+          status: getEnumValue(
+            leadStatuses,
+            getCell(row, "status"),
+            "New"
+          ),
 
-        outsourceScore: getOutsourceScore(
-          getCell(row, "outsourceScore")
-        ),
+          priority: getEnumValue(
+            leadPriorities,
+            getCell(row, "priority"),
+            "B"
+          ),
 
-        projectSize: getEnumValue(
-          projectSizes,
-          getCell(row, "projectSize"),
-          "£5k - £20k"
-        ),
+          outsourceScore: getOutsourceScore(
+            getCell(row, "outsourceScore")
+          ),
 
-        source: getText(
-          getCell(row, "source")
-        ),
+          projectSize: getEnumValue(
+            projectSizes,
+            getCell(row, "projectSize"),
+            "£5k - £20k"
+          ),
 
-        techStack: getText(
-          getCell(row, "techStack")
-        ),
+          source: getText(getCell(row, "source")),
 
-        followUp: getOptionalDate(
-          getCell(row, "followUp")
-        ),
+          techStack: getText(getCell(row, "techStack")),
 
-        lastContacted: getOptionalDate(
-          getCell(row, "lastContacted")
-        ),
+          followUp: getOptionalDate(
+            getCell(row, "followUp")
+          ),
 
-        notes: getText(
-          getCell(row, "notes")
-        ),
+          lastContacted: getOptionalDate(
+            getCell(row, "lastContacted")
+          ),
+
+          notes: getText(getCell(row, "notes")),
+        },
       });
     });
 
-    if (validLeads.length === 0) {
+    if (preparedLeads.length === 0) {
       return NextResponse.json(
         {
           success: false,
@@ -358,6 +386,92 @@ export async function POST(request: NextRequest) {
 
     await connectToDatabase();
 
+    /*
+     * Get existing leads that have any of the imported
+     * company names. Country is then checked in JavaScript.
+     */
+    const companyNames = [
+      ...new Set(
+        preparedLeads.map((lead) => lead.data.company)
+      ),
+    ];
+
+    const existingLeads = await Lead.find(
+      {
+        company: {
+          $in: companyNames,
+        },
+      },
+      {
+        company: 1,
+        country: 1,
+      }
+    )
+      .collation({
+        locale: "en",
+        strength: 2,
+      })
+      .lean();
+
+    const existingLeadKeys = new Set(
+      existingLeads.map((lead) =>
+        createDuplicateKey(lead.company, lead.country)
+      )
+    );
+
+    /*
+     * Tracks duplicates inside the uploaded spreadsheet.
+     */
+    const spreadsheetLeadKeys = new Set<string>();
+
+    const validLeads: PreparedLead["data"][] = [];
+
+    preparedLeads.forEach(
+      ({ spreadsheetRowNumber, data }) => {
+        const duplicateKey = createDuplicateKey(
+          data.company,
+          data.country
+        );
+
+        if (existingLeadKeys.has(duplicateKey)) {
+          skippedRows.push({
+            row: spreadsheetRowNumber,
+            reason: `"${data.company}" already exists for "${data.country}".`,
+          });
+
+          return;
+        }
+
+        if (spreadsheetLeadKeys.has(duplicateKey)) {
+          skippedRows.push({
+            row: spreadsheetRowNumber,
+            reason: `Duplicate company and country in spreadsheet: "${data.company}" - "${data.country}".`,
+          });
+
+          return;
+        }
+
+        spreadsheetLeadKeys.add(duplicateKey);
+        validLeads.push(data);
+      }
+    );
+
+    if (validLeads.length === 0) {
+      return NextResponse.json(
+        {
+          success: false,
+          message:
+            "No new leads were imported. All valid rows already exist or are duplicated.",
+          insertedCount: 0,
+          skippedCount: skippedRows.length,
+          skippedRows,
+        },
+        {
+          status: 400,
+        }
+      );
+    }
+
     const insertedLeads = await Lead.insertMany(
       validLeads,
       {
@@ -368,7 +482,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       {
         success: true,
-        message: `${insertedLeads.length} leads saved successfully.`,
+        message: `${insertedLeads.length} leads saved successfully. ${skippedRows.length} rows skipped.`,
 
         insertedCount: insertedLeads.length,
         skippedCount: skippedRows.length,

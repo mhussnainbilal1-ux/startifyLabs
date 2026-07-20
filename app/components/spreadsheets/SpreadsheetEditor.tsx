@@ -437,10 +437,26 @@ export default function SpreadsheetEditor() {
       };
   
       if (!response.ok || !result.success) {
-        throw new Error(
+        let errorMessage =
           result.message ||
-            "Unable to save spreadsheet data."
-        );
+          "Unable to save spreadsheet data.";
+  
+        if (
+          result.skippedRows &&
+          result.skippedRows.length > 0
+        ) {
+          const skippedDetails = result.skippedRows
+            .slice(0, 10)
+            .map(
+              (item) =>
+                `Row ${item.row}: ${item.reason}`
+            )
+            .join(" | ");
+  
+          errorMessage += ` ${skippedDetails}`;
+        }
+  
+        throw new Error(errorMessage);
       }
   
       let successMessage =
@@ -451,10 +467,8 @@ export default function SpreadsheetEditor() {
         result.skippedCount &&
         result.skippedCount > 0
       ) {
-        successMessage += ` ${result.skippedCount} row(s) skipped.`;
-  
         const skippedDetails = result.skippedRows
-          ?.slice(0, 5)
+          ?.slice(0, 10)
           .map(
             (item) =>
               `Row ${item.row}: ${item.reason}`
@@ -473,11 +487,12 @@ export default function SpreadsheetEditor() {
         error
       );
   
-      setMessage(
+      const errorMessage =
         error instanceof Error
           ? error.message
-          : "Unable to save spreadsheet data."
-      );
+          : "Unable to save spreadsheet data.";
+  
+      setMessage(errorMessage);
     } finally {
       setIsSaving(false);
     }
