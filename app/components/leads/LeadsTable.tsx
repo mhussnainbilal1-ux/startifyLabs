@@ -896,7 +896,9 @@ export default function LeadsTable() {
                 <th style={tableHeaderStyle}>
                   Company
                 </th>
-
+                <th style={tableHeaderStyle}>
+                  Score
+                </th>
                 <th style={tableHeaderStyle}>
                   Contact
                 </th>
@@ -933,9 +935,7 @@ export default function LeadsTable() {
                   Status
                 </th>
 
-                <th style={tableHeaderStyle}>
-                  Score
-                </th>
+               
 
                 <th style={tableHeaderStyle}>
                   Project Size
@@ -1073,7 +1073,60 @@ export default function LeadsTable() {
                           </strong>
                         )}
                       </td>
+                      <td style={tableCellStyle}>
+                        {isEditing ? (
+                          <select
+                            name="outsourceScore"
+                            value={
+                              editForm.outsourceScore
+                            }
+                            onChange={
+                              handleEditChange
+                            }
+                            style={{
+                              ...tableInputStyle,
+                              minWidth: "100px",
+                            }}
+                          >
+                            {Array.from(
+                              { length: 10 },
+                              (_, index) => {
+                                const score =
+                                  index + 1;
 
+                                return (
+                                  <option
+                                    key={score}
+                                    value={score}
+                                  >
+                                    {score}/10
+                                  </option>
+                                );
+                              }
+                            )}
+                          </select>
+                        ) : (
+                          <span
+                            style={{
+                              ...getScoreStyle(
+                                lead.outsourceScore
+                              ),
+                              display:
+                                "inline-block",
+                              padding:
+                                "6px 10px",
+                              borderRadius:
+                                "20px",
+                              fontSize: "12px",
+                              fontWeight: 700,
+                            }}
+                          >
+                            {lead.outsourceScore ??
+                              5}
+                            /10
+                          </span>
+                        )}
+                      </td>
                       <td style={tableCellStyle}>
                         {isEditing ? (
                           <input
@@ -1344,60 +1397,7 @@ export default function LeadsTable() {
                         )}
                       </td>
 
-                      <td style={tableCellStyle}>
-                        {isEditing ? (
-                          <select
-                            name="outsourceScore"
-                            value={
-                              editForm.outsourceScore
-                            }
-                            onChange={
-                              handleEditChange
-                            }
-                            style={{
-                              ...tableInputStyle,
-                              minWidth: "100px",
-                            }}
-                          >
-                            {Array.from(
-                              { length: 10 },
-                              (_, index) => {
-                                const score =
-                                  index + 1;
-
-                                return (
-                                  <option
-                                    key={score}
-                                    value={score}
-                                  >
-                                    {score}/10
-                                  </option>
-                                );
-                              }
-                            )}
-                          </select>
-                        ) : (
-                          <span
-                            style={{
-                              ...getScoreStyle(
-                                lead.outsourceScore
-                              ),
-                              display:
-                                "inline-block",
-                              padding:
-                                "6px 10px",
-                              borderRadius:
-                                "20px",
-                              fontSize: "12px",
-                              fontWeight: 700,
-                            }}
-                          >
-                            {lead.outsourceScore ??
-                              5}
-                            /10
-                          </span>
-                        )}
-                      </td>
+                   
 
                       <td style={tableCellStyle}>
                         {isEditing ? (

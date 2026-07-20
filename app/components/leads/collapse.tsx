@@ -85,8 +85,38 @@ export default function LeadCollapseCard() {
       <CollapseCard title="Import Sheet">
       <SpreadsheetEditor/>
       </CollapseCard>
+      <CollapseCard title="Spreadsheet Columns">
+        <SpreadsheetColumns/>
+      </CollapseCard>
     </div>
   );
 }
 
-
+const SpreadsheetColumns=()=>{
+ 
+  return(
+    <>
+    <h4>Spreadsheet Columns</h4> 
+<p>
+Company,
+Contact,
+Email,
+Website,
+LinkedIn,
+Country,
+Industry,
+Employees,
+Service,
+Status,
+Priority,
+Outsource Probability,
+Project Size,
+Source,
+Tech Stack,
+Follow Up,
+Last Contacted,
+Notes,
+</p>
+    </>
+  )
+}
