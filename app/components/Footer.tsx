@@ -9,13 +9,11 @@ export default function Footer() {
         <div className="row">
           {/* Left */}
           <div className="col-lg-5 border-e-dashed">
-            {/* <Logo color="white"/> */}
-
+         
+            <Logo textColor="#00bcd4"/>
             <p className="my-4">
             Startify Labs is a UK-registered software development company helping startups, agencies, and growing businesses build scalable digital products. From custom web applications and SaaS platforms to mobile apps and AI-powered solutions, we deliver reliable, high-quality software with a focus on innovation, transparency, and long-term partnerships.
             </p>
-
-          
           </div>
 
           {/* Right */}

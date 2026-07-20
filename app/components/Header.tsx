@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Logo } from "./Logo";
-
+import Image from "next/image";
 export default function Header() {
     const [isOpen, setIsOpen] = useState(false);
     const [isSticky, setIsSticky] = useState(false);
@@ -29,7 +29,7 @@ export default function Header() {
             className="navbar navbar-expand-lg fixed-top"
             style={{
                 transition: "all 0.3s ease",
-                backgroundColor: isSticky ? "#ffffff" : "transparent",
+                backgroundColor: isSticky ? "#ffffff" : "#f5f6f8",
                 boxShadow: isSticky
                     ? "0 4px 20px rgba(0,0,0,0.08)"
                     : "none",
@@ -40,9 +40,7 @@ export default function Header() {
 
             <div className="container">
                 {/* Brand */}
-                <Link href="#home" className="navbar-brand">
-                    <Logo/>
-                </Link>
+                <Logo />
 
                 {/* Mobile Toggle */}
                 <button
@@ -119,7 +117,8 @@ export default function Header() {
                     </ul>
 
                     {/* CTA Button */}
-                    <Link
+                    <Link 
+                    onClick={() => { setActiveMenu("contact"); setIsOpen(false) }}
                         href="#contact"
                         className="btn btn-sm nav-btn text-primary mb-4 mb-lg-0"
                     >

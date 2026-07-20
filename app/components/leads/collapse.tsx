@@ -4,6 +4,7 @@ import { useState } from "react";
 import LeadForm from "./leadForm";
 import LeadsTable from "./LeadsTable";
 import LogoutButton from "../auth/LogoutButton";
+import SpreadsheetEditor from "../spreadsheets/SpreadsheetEditor";
 
 function CollapseCard({ title, children, defaultOpen = false }:any) {
   const [open, setOpen] = useState(defaultOpen);
@@ -14,7 +15,7 @@ function CollapseCard({ title, children, defaultOpen = false }:any) {
         border: "1px solid #e5e7eb",
         borderRadius: "12px",
         marginBottom: "20px",
-        overflow: "hidden",
+        overflowX: "auto",
         background: "#fff",
         boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
       }}
@@ -48,7 +49,7 @@ function CollapseCard({ title, children, defaultOpen = false }:any) {
       <div
         style={{
           maxHeight: open ? "3000px" : "0",
-          overflow: "hidden",
+          overflowX: "auto",
           transition: "max-height 0.35s ease",
         }}
       >
@@ -68,17 +69,21 @@ export default function LeadCollapseCard() {
         marginTop:"100px",
        // border: "2px solid",
      //   borderImage: "linear-gradient(135deg,#172d51 0%, #00bcd4 100%) 1",
+     overflow:"auto"
       }}
     >
           <div style={{ marginBottom: "12px", display: "flex", justifyContent: "end" }}>
               <LogoutButton />
           </div>
-      <CollapseCard title="Add New Lead">
+      <CollapseCard title="Add">
         <LeadForm />
       </CollapseCard>
 
-      <CollapseCard title="Leads List">
+      <CollapseCard title="List">
         <LeadsTable />
+      </CollapseCard>
+      <CollapseCard title="Import Sheet">
+      <SpreadsheetEditor/>
       </CollapseCard>
     </div>
   );

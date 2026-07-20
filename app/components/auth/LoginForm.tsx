@@ -150,7 +150,7 @@ export default function LoginForm() {
               type="email"
               value={form.email}
               onChange={handleChange}
-              placeholder="admin@startifylabs.co.uk"
+              placeholder="Enter your email"
               autoComplete="email"
               required
               style={inputStyle}
