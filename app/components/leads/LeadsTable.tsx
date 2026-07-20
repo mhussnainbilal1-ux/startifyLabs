@@ -857,7 +857,9 @@ export default function LeadsTable() {
         <div
           style={{
             width: "100%",
-            overflowX: "auto",
+            overflow: "auto",
+            maxHeight: "70vh",
+            position: "relative",
             backgroundColor: "#ffffff",
             border: "1px solid #e8edf3",
             borderRadius: "14px",
@@ -869,10 +871,17 @@ export default function LeadsTable() {
             style={{
               width: "100%",
               minWidth: "3300px",
-              borderCollapse: "collapse",
+              borderCollapse: "separate",
+              borderSpacing: 0,
             }}
           >
-            <thead>
+            <thead
+              style={{
+                position: "sticky",
+                top: 0,
+                zIndex: 10,
+              }}
+            >
               <tr
                 style={{
                   background:
@@ -962,7 +971,7 @@ export default function LeadsTable() {
                     ...tableHeaderStyle,
                     position: "sticky",
                     right: 0,
-                    zIndex: 3,
+                    zIndex: 12,
                     textAlign: "center",
                     backgroundColor: "#172d51",
                   }}
